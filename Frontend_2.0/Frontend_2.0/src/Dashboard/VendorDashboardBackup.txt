@@ -1,0 +1,38 @@
+import { useState } from "react";
+import Sidebar from "../Layout/Sidebar";
+import RequestTable from "./UI/RequestTable";
+import ServiceTabs from "./UI/ServiceTabs";
+
+function VendorDashboard() {
+  const vendor = JSON.parse(localStorage.getItem("authVendor"));
+  const [renderComponant, setRenderComponant] = useState("default");
+
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-2 pt-5">
+          <Sidebar setRenderComponant={setRenderComponant} />
+        </div>
+        <div className="col-md-10">
+          {renderComponant === "completed" ? (
+            <ServiceTabs
+              data={vendor.services}
+              renderComponant={renderComponant}
+            />
+          ) : renderComponant === "pending" ? (
+            <ServiceTabs
+              data={vendor.services}
+              renderComponant={renderComponant}
+            />
+          ) : renderComponant === "request" ? (
+            <RequestTable />
+          ) : (
+            <RequestTable />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default VendorDashboard;

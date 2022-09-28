@@ -1,0 +1,26 @@
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import CompletedTable from "./CompletedTable";
+import PendingTable from "./PendingTable";
+
+function ServiceTabs(props) {
+  return (
+    <Tabs
+      defaultActiveKey="profile"
+      id="justify-tab-example"
+      className="mb-3"
+      justify
+    >
+      {props.data.map((item) => {
+        return (
+          <Tab eventKey={item.id} title={item.serviceType}>
+            {props.renderComponant === "completed" ? <CompletedTable service={item} /> : props.renderComponant === "pending"? <PendingTable service={item}/> : <CompletedTable service={item} />}
+            
+          </Tab>
+        );
+      })}
+    </Tabs>
+  );
+}
+
+export default ServiceTabs;
